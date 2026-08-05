@@ -1,0 +1,268 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Air Max Pulse",
+            "brand": "Nike",
+            "price": 149,
+            "category": "Running",
+            "sizes": [7, 8, 9, 10, 11],
+            "image": "https://img.joomcdn.net/f5410e5b2f8294e88cdb219c4a8968215d1e9752_original.jpeg",
+            "description":
+            "Lightweight running sneakers with responsive cushioning and breathable mesh upper."
+        },
+        {
+            "id": 2,
+            "name": "Blazer Mid '77",
+            "brand": "Nike",
+            "price": 105,
+            "category": "Casual",
+            "sizes": [7, 8, 9, 10],
+            "image": "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/edde6171-407b-42fc-b680-858e87462337/BLAZER+MID+%2777+OD+NBY.png",
+            "description":
+            "Retro-inspired sneakers with clean leather design and suede details."
+        },
+        {
+            "id": 3,
+            "name": "Pegasus 41",
+            "brand": "Nike",
+            "price": 135,
+            "category": "Running",
+            "sizes": [6, 7, 8, 9, 10, 11],
+            "image": "https://static.nike.com/a/images/f_auto/dpr_3.0,cs_srgb/w_363,c_limit/e9381da2-3e10-47c7-9e08-129db0925160/nike-pr%C3%A4sentiert-die-technologischen-innovationen-des-pegasus-41.jpg",
+            "description":
+            "Versatile running sneakers designed for daily comfort and speed."
+        },
+        {
+            "id": 4,
+            "name": "Air Jordan 1 Mid",
+            "brand": "Jordan",
+            "price": 160,
+            "category": "Basketball",
+            "sizes": [7, 8, 9, 10, 11, 12],
+            "image": "https://shadestudios.de/cdn/shop/files/air-jordan-1-mid-blueberry-694654.jpg?v=1735062853&width=2048",
+            "description":
+            "Legendary basketball-inspired sneakers with premium leather finish."
+        },
+        {
+            "id": 5,
+            "name": "Air Jordan 4 Retro",
+            "brand": "Jordan",
+            "price": 220,
+            "category": "Basketball",
+            "sizes": [7, 8, 9, 10, 11],
+            "image": "https://www.dtlr.com/cdn/shop/articles/FQ8138-002-D_1000x1000.jpg?v=1730929173",
+            "description":
+            "Classic retro basketball sneakers with iconic streetwear style."
+        },
+        {
+            "id": 6,
+            "name": "Jordan Max Aura 5",
+            "brand": "Jordan",
+            "price": 145,
+            "category": "Lifestyle",
+            "sizes": [7, 8, 9, 10],
+            "image": "https://static.runnea.com/images/202405/jordan-max-aura-5-zapatillas-sneaker-perfil.jpg?0",
+            "description":
+            "Modern sneakers combining Jordan heritage with everyday comfort."
+        },
+        {
+            "id": 7,
+            "name": "Ultraboost 23",
+            "brand": "Adidas",
+            "price": 180,
+            "category": "Running",
+            "sizes": [6, 7, 8, 9, 10],
+            "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/c9045494c79b4daca8ad306c22565cdf_9366/Ultraboost_Light_23_Shoes_Black_HP6443.jpg",
+            "description":
+            "Comfort-focused sneakers designed for daily runs and all-day wear."
+        },
+        {
+            "id": 8,
+            "name": "Forum Low",
+            "brand": "Adidas",
+            "price": 110,
+            "category": "Lifestyle",
+            "sizes": [6, 7, 8, 9, 10, 11],
+            "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/09c5ea6df1bd4be6baaaac5e003e7047_9366/Forum_Low_Schuh_Weiss_FY7756_01_00_standard.jpg",
+            "description":
+            "Vintage basketball-inspired sneakers with modern streetwear appeal."
+        },
+        {
+            "id": 9,
+            "name": "Superstar XLG",
+            "brand": "Adidas",
+            "price": 100,
+            "category": "Casual",
+            "sizes": [7, 8, 9, 10, 11],
+            "image": "https://www.sneakertwins.de/out/pictures/generated/product/2/1200_1200_90/adidas_originals_superstar_xlg_sneaker_if3004_2180.jpg",
+            "description":
+            "Bold updated version of the iconic Superstar with chunky styling."
+        },
+        {
+            "id": 10,
+            "name": "574 Core",
+            "brand": "New Balance",
+            "price": 95,
+            "category": "Casual",
+            "sizes": [7, 8, 9, 10, 11],
+            "image": "https://m.media-amazon.com/images/I/81-Zhgynz5L._AC_UY900_.jpg",
+            "description":
+            "Everyday sneakers with suede overlays and premium comfort."
+        },
+        {
+            "id": 11,
+            "name": "FuelCell Rebel v4",
+            "brand": "New Balance",
+            "price": 140,
+            "category": "Running",
+            "sizes": [7, 8, 9, 10, 11],
+            "image": "https://www.lunge.de/cdn/shop/files/newbalance-fuelcell-rebel-v4-weissorange-01_2000x.webp?v=1740552711",
+            "description":
+            "High-performance running sneakers built for speed and lightweight comfort."
+        },
+        {
+            "id": 12,
+            "name": "9060",
+            "brand": "New Balance",
+            "price": 155,
+            "category": "Lifestyle",
+            "sizes": [7, 8, 9, 10],
+            "image": "https://de.afew-store.com/cdn/shop/collections/new-balance-9060_5de02af2-2e42-422b-9e55-568d1b3ae16f.jpg?v=1713954437&width=2400",
+            "description":
+            "Futuristic lifestyle sneakers featuring chunky soles and premium materials."
+        },
+        {
+            "id": 13,
+            "name": "Dunk Low Retro",
+            "brand": "Nike",
+            "price": 120,
+            "category": "Casual",
+            "sizes": [7, 8, 9, 10, 11],
+            "image": "https://www.asphaltgold.com/cdn/shop/files/RKyjUHJyHwZzGcKqW1tF_HF3141-200-Nike-Dunk-Low-Retro-SE-Dusted-Clay-Dusty-Amethyst-Team-Gold-sm-1.jpg?crop=center&height=768&v=1740985605&width=768",
+            "description":
+            "Classic low-top sneakers with timeless basketball-inspired design and everyday comfort."
+        },
+        {
+            "id": 14,
+            "name": "Zoom Fly 6",
+            "brand": "Nike",
+            "price": 170,
+            "category": "Running",
+            "sizes": [6, 7, 8, 9, 10, 11],
+            "image": "https://storage.googleapis.com/bitr-cdn/wp-content/uploads/2024/11/Nike-Zoom-Fly-6-side.jpg",
+            "description":
+            "Lightweight performance running shoes with responsive foam cushioning and speed-focused design."
+        },
+        {
+            "id": 15,
+            "name": "Court Vision Low",
+            "brand": "Nike",
+            "price": 90,
+            "category": "Lifestyle",
+            "sizes": [7, 8, 9, 10],
+            "image": "https://www.futbolemotion.com/imagesarticulos/269231/grandes/zapatilla-nike-court-vision-low-gris-0.webp",
+            "description":
+            "Retro basketball-inspired sneakers with durable leather upper and clean minimalist style."
+        },
+        {
+            "id": 16,
+            "name": "Jordan One Take 5",
+            "brand": "Jordan",
+            "price": 130,
+            "category": "Basketball",
+            "sizes": [7, 8, 9, 10, 11, 12],
+            "image": "https://sneakernews.com/wp-content/uploads/2024/07/jordan-one-take-5-cool-grey-HF0451-001-2.jpg",
+            "description":
+            "Performance basketball sneakers designed for quick cuts, stability, and explosive movement."
+        },
+        {
+            "id": 17,
+            "name": "Air Jordan Legacy 312 Low",
+            "brand": "Jordan",
+            "price": 155,
+            "category": "Lifestyle",
+            "sizes": [7, 8, 9, 10, 11],
+            "image": "https://i.pinimg.com/736x/96/96/6b/96966bfbdcbd706e9ea03107cdff3e9d.jpg",
+            "description":
+            "Stylish low-top sneakers blending iconic Jordan heritage with modern streetwear aesthetics."
+        },
+        {
+            "id": 18,
+            "name": "Jordan Stay Loyal 3",
+            "brand": "Jordan",
+            "price": 140,
+            "category": "Casual",
+            "sizes": [7, 8, 9, 10, 11],
+            "image": "https://sk.basketzone.net/zdjecia/2022/04/06/304/39/Q13266DSC_2560.JPG",
+            "description":
+            "Comfortable everyday sneakers inspired by classic Air Jordan details and premium materials."
+        },
+        {
+            "id": 19,
+            "name": "Adizero SL",
+            "brand": "Adidas",
+            "price": 130,
+            "category": "Running",
+            "sizes": [6, 7, 8, 9, 10],
+            "image": "https://www.asphaltgold.com/cdn/shop/files/3xZrrrX3UQRnCxuRVHEL_JH6208-Adidas-adizero-Evo-SL-Footwear-White-Core-Black-Footwear-White-SM-1.jpg?crop=center&height=768&v=1742396023&width=768",
+            "description":
+            "Fast and lightweight running shoes built for training sessions and daily performance."
+        },
+        {
+            "id": 20,
+            "name": "Campus 00s",
+            "brand": "Adidas",
+            "price": 115,
+            "category": "Casual",
+            "sizes": [7, 8, 9, 10, 11],
+            "image": "https://www.asphaltgold.com/cdn/shop/files/xlXf2qttVWeffUjivhSl-JQ8318-Adidas-Campus-00s-Double-W-Preloved-Brown-Sand-Strata-Origin-Tint-of-sm-1.jpg?crop=center&height=768&v=1760536025&width=768",
+            "description":
+            "Chunky retro-inspired sneakers with suede upper and modern skate-style silhouette."
+        },
+        {
+            "id": 21,
+            "name": "NMD_R1",
+            "brand": "Adidas",
+            "price": 160,
+            "category": "Lifestyle",
+            "sizes": [6, 7, 8, 9, 10, 11],
+            "image": "https://down-th.img.susercontent.com/file/785094a4b9ca59d4402872fa6a0dd5c2",
+            "description":
+            "Modern lifestyle sneakers featuring responsive cushioning and sleek urban styling."
+        },
+        {
+            "id": 22,
+            "name": "Fresh Foam X 1080v13",
+            "brand": "New Balance",
+            "price": 190,
+            "category": "Running",
+            "sizes": [7, 8, 9, 10, 11],
+            "image": "https://cdn.evrysz.net/1000x1000/24/new-balance-fresh-foam-x-1080v13-m1080i13.png",
+            "description":
+            "Premium cushioned running shoes engineered for smooth rides and maximum comfort."
+        },
+        {
+            "id": 23,
+            "name": "327",
+            "brand": "New Balance",
+            "price": 110,
+            "category": "Lifestyle",
+            "sizes": [6, 7, 8, 9, 10],
+            "image": "https://www.tower-london.de/cdn/shop/articles/TWRSHT_5662.jpg?v=1691391753&width=2048",
+            "description":
+            "Retro-inspired lifestyle sneakers with bold branding and lightweight everyday comfort."
+        },
+        {
+            "id": 24,
+            "name": "550",
+            "brand": "New Balance",
+            "price": 120,
+            "category": "Basketball",
+            "sizes": [7, 8, 9, 10, 11],
+            "image": "https://www.sneakertwins.de/out/pictures/generated/product/2/1200_1200_90/new_balance_550_sneaker_bb550se1_2850.jpg",
+            "description":
+            "Classic basketball-inspired sneakers featuring premium leather and vintage court style."
+        }
+    ]
+}
