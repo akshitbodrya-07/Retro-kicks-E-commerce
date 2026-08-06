@@ -1,6 +1,6 @@
 import {Search} from 'lucide-react'
 import { useState } from 'react'
-import useFetch from '../hooks/useFetch'
+import useProducts from '../hooks/useProducts'
 import useDebounce from '../hooks/useDebounce'
 import ProductCard from '../components/ui/ProductCard'
 import SkeletonCard from '../components/ui/SkeletonCard'
@@ -12,7 +12,7 @@ const Shop = () => {
   const[selectedBrand, setSelectedBrand] = useState("All")
   const[search, setSearch] = useState('')
 
-  const {data, loading, error} = useFetch("http://localhost:3001/products")
+  const {data, loading, error} = useProducts()
   const debouncedSearch = useDebounce(search, 300)
 
   const filtered = data?.filter(product => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import useFetch from '../hooks/useFetch'
+import useProduct from '../hooks/useProduct'
 import { ChevronRight, Star, Truck, RefreshCcw, ShieldCheck } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Button from '../components/ui/Button'
@@ -8,8 +8,7 @@ import Button from '../components/ui/Button'
 const ProductDetail = () => {
   const {id} = useParams()
 
-  const {data, loading, error} = useFetch(`http://localhost:3001/products/${id}`)
-  console.log(data)
+  const {data, loading, error} = useProduct(id)
 
   const discountPrice = data?.price * 0.10
   const finalPrice = data?.price - discountPrice
@@ -56,7 +55,7 @@ const ProductDetail = () => {
           <div className='border-t-2 border-white/10 py-5'>
             <h3 className='text-zinc-500 tracking-widest uppercase text-sm'>Select Size (UK)</h3>
             <div className='flex items-center gap-4 mt-5'>
-              {data?.sizes.map(size => (
+              {data?.sizes?.map(size => (
                 <div 
                   key={size}
                   onClick={() => setSelectedSize(size)} 

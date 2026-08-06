@@ -3,17 +3,13 @@ import ProductCard from '../components/ui/ProductCard'
 import SkeletonCard from '../components/ui/SkeletonCard'
 import Button from '../components/ui/Button'
 import { Link } from 'react-router-dom'
-import useFetch from '../hooks/useFetch'
+import useProducts from '../hooks/useProducts'
 
 const Home = () => {
   const brands = ["All", "Nike", "Jordan", "Adidas", "New Balance"]
   
 
-  const {data, loading, error} = useFetch("http://localhost:3001/products")
-  console.log("data:", data)
-console.log("loading:", loading)
-console.log("error:", error)
-
+  const {data, loading, error} = useProducts()
 
   return (
     <div className='px-16'>
