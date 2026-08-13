@@ -1,7 +1,7 @@
 # Retro Kicks 👟
 > A retro-styled sneaker e-commerce storefront — browse, search, and shop kicks with a smooth, modern shopping experience.
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-2C5282?style=for-the-badge)](retro-kicks-e-commerce.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-2C5282?style=for-the-badge)](https://retro-kicks-e-commerce.vercel.app/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
