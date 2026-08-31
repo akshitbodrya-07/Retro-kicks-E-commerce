@@ -50,45 +50,45 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className='px-20 py-4'>
-      <div className='text-lg flex items-center gap-2 px-6'>
+    <div className='px-4 sm:px-10 lg:px-20 py-4'>
+      <div className='text-lg flex items-center gap-2 px-1 sm:px-6 flex-wrap'>
         <Link to="/" className='text-gray-500 text-sm hover:text-white '>Home</Link>
-        <ChevronRight />    
-        <Link to="/shop" className='text-gray-500 text-sm hover:text-white'>Shop</Link>  
-        <ChevronRight />  
+        <ChevronRight />
+        <Link to="/shop" className='text-gray-500 text-sm hover:text-white'>Shop</Link>
+        <ChevronRight />
         <span>{data?.name}</span>
       </div>
-      <div className='grid grid-cols-2 mt-5 border-b-2 border-white/10'>
+      <div className='grid grid-cols-1 lg:grid-cols-2 mt-5 border-b-2 border-white/10'>
         <div className='flex flex-col gap-4'>
-          <div className='h-[500px] bg-zinc-900 rounded-xl overflow-hidden'>
+          <div className='h-[300px] sm:h-[400px] lg:h-[500px] bg-zinc-900 rounded-xl overflow-hidden'>
             <img src={data?.image} alt={data?.name} className='w-full h-full object-cover p-8'/>
           </div>
-          <div className='flex items-center gap-4 mt-4 ml-8'>
+          <div className='flex items-center gap-4 mt-4 ml-2 sm:ml-8'>
               {[1,2,3].map(i => (
                 <div key={i} className='w-20 h-20 bg-zinc-900 rounded-lg overflow-hidden border border-zinc-700 cursor-pointer hover:border-red-500 transition-colors'>
                   <img src={data?.image} alt='' className='w-full h-full object-contain p-2'/>
                 </div>
-              ))}        
+              ))}
           </div>
         </div>
-        <div className='px-14 py-5 flex flex-col gap-10'>
+        <div className='px-1 sm:px-8 lg:px-14 py-5 flex flex-col gap-10'>
 
           <div>
             <h3 className='text-red-500 tracking-widest uppercase text-xl'>{data?.brand}</h3>
-            <h1 className='text-7xl text-white font-semibold'>{data?.name}</h1>
+            <h1 className='text-4xl sm:text-5xl lg:text-7xl text-white font-semibold'>{data?.name}</h1>
             <div className='flex items-center gap-3 text-zinc-500 mt-4'>
               <Star size={20}/>
               <h3>(128 reviews)</h3>
             </div>
             <div className='flex items-center gap-4'>
-              <h1 className='text-5xl text-red-500 mt-4'>${finalPrice}</h1>
+              <h1 className='text-4xl sm:text-5xl text-red-500 mt-4'>${finalPrice}</h1>
               <h3 className='text-xl text-zinc-500 line-through mt-4'>${data?.price}</h3>
             </div>
           </div>
 
           <div className='border-t-2 border-white/10 py-5'>
             <h3 className='text-zinc-500 tracking-widest uppercase text-sm'>Select Size (UK)</h3>
-            <div className='flex items-center gap-4 mt-5'>
+            <div className='flex items-center gap-4 mt-5 flex-wrap'>
               {data?.sizes?.map(size => (
                 <div
                   key={size}
@@ -109,16 +109,16 @@ const ProductDetail = () => {
             <p className='text-lg text-zinc-500 mt-5'>{data?.description}</p>
           </div>
 
-          <div className='flex items-center gap-8 mb-2 justify-between'>
-            <div className='w-1/5 flex items-center gap-3 text-zinc-500'>
+          <div className='flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 sm:gap-8 mb-2'>
+            <div className='flex items-center gap-3 text-zinc-500'>
               <Truck size={30}/>
               <p>Free shipping over $150</p>
             </div>
-            <div className='w-1/5 flex items-center gap-3 text-zinc-500'>
+            <div className='flex items-center gap-3 text-zinc-500'>
               <RefreshCcw size={28}/>
               <p>30 day return Policy</p>
             </div>
-            <div className='w-1/5 flex items-center gap-3 text-zinc-500'>
+            <div className='flex items-center gap-3 text-zinc-500'>
               <ShieldCheck size={28}/>
               <p>Authentic guarantee</p>
             </div>

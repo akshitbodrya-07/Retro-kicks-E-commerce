@@ -12,16 +12,16 @@ const Home = () => {
   const {data, loading, error} = useProducts()
 
   return (
-    <div className='px-16'>
+    <div className='px-4 sm:px-8 lg:px-16'>
       {/* Hero section */}
-      <div className='flex items-center justify-between px-12 py-10 min-h-[650px]'>
-        <div className='w-1/2 flex flex-col gap-10'>
+      <div className='flex flex-col lg:flex-row items-center justify-between px-2 sm:px-6 lg:px-12 py-10 lg:min-h-[650px]'>
+        <div className='w-full lg:w-1/2 flex flex-col gap-8 lg:gap-10'>
           <div className='w-fit px-3 py-1 bg-red-950 bg-transparent opacity-100 border-2 border-red-900 rounded-full mt-3'>
-            <p className='text-red-500 tracking-widest'>✦ NEW ARRIVALS 2026</p>
+            <p className='text-red-500 tracking-widest text-sm sm:text-base'>✦ NEW ARRIVALS 2026</p>
           </div>
           <div>
-            <h1 className='text-7xl'>Step Into</h1>
-            <h1 className='text-7xl mt-4'><span className='text-red-500 text-7xl'>Retro</span> Style</h1>
+            <h1 className='text-5xl sm:text-6xl lg:text-7xl'>Step Into</h1>
+            <h1 className='text-5xl sm:text-6xl lg:text-7xl mt-4'><span className='text-red-500'>Retro</span> Style</h1>
             <p className='text-l text-zinc-500 mt-4 tracking-wide'>Premium vintage sneakers from Nike, Adidas, Jordan & New Balance.</p>
           </div>
           <div className='flex items-center gap-8'>
@@ -30,7 +30,7 @@ const Home = () => {
             </Link>
             <Button variant = "outline">View Lookbook</Button>
           </div>
-            <div className='flex items-center gap-12 mt-16 border-t-2 border-white/10 pt-12'>
+            <div className='flex items-center gap-8 sm:gap-12 mt-4 lg:mt-16 border-t-2 border-white/10 pt-12'>
             <div>
               <h1 className='text-3xl font-semibold'>500+</h1>
               <h3 className='text-zinc-500 tracking-widest'>SNEAKERS</h3>
@@ -45,12 +45,12 @@ const Home = () => {
             </div>
           </div>
         </div>
-        
-        <div className="flex items-center justify-center relative pt-10">
-            <img 
-              src="https://media.cgtrader.com/variants/93wN6mvMLab67Mj32DL9XUqf/78add9c2f02fbd73a43ffb3970be38683c5f15eff6ca849dc78c644f4ff9ce1b/Jordans_render_1.webp" 
+
+        <div className="w-full lg:w-auto flex items-center justify-center relative pt-10">
+            <img
+              src="https://media.cgtrader.com/variants/93wN6mvMLab67Mj32DL9XUqf/78add9c2f02fbd73a43ffb3970be38683c5f15eff6ca849dc78c644f4ff9ce1b/Jordans_render_1.webp"
               alt="Hero sneaker"
-              className="w-[900px] object-contain mix-blend-screen"
+              className="w-full max-w-[900px] object-contain mix-blend-screen"
               style={{
                     maskImage: 'radial-gradient(ellipse 80% 70% at 50% 60%, black 40%, transparent 100%)'
                     }}
@@ -58,7 +58,7 @@ const Home = () => {
           </div>
       </div>
       {/* Category section */}
-      <div className='px-12 py-6 flex items-center gap-3  border-2 border-white/10 pt-8'>
+      <div className='px-2 sm:px-6 lg:px-12 py-6 flex items-center gap-3 flex-wrap border-2 border-white/10 pt-8'>
         {brands.map(brand => (
           <button
             key={brand}
@@ -69,15 +69,15 @@ const Home = () => {
         ))}
       </div>
       {/* Trending section */}
-      <div className='px-12 py-10'>
+      <div className='px-2 sm:px-6 lg:px-12 py-10'>
         <div className='flex items-center justify-between mb-8'>
-          <h1 className='text-3xl font-semibold text-white'>Trending Now</h1>
+          <h1 className='text-2xl sm:text-3xl font-semibold text-white'>Trending Now</h1>
           <Link to="/shop" className='text-red-500 text-sm'>
             View All →
           </Link>
         </div>
 
-        <div className='grid grid-cols-4 gap-6'>
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6'>
           {loading?(
             Array(12).fill(0).map((_,i) => <SkeletonCard key={i}/>)
           ): error?(
@@ -98,15 +98,15 @@ const Home = () => {
         </div>
       </div>
       {/* New Arrival section */}
-      <div className='flex items-center justify-between px-12 py-10 rounded-2xl mx-12 mb-12 border border-red-500/20'
+      <div className='flex flex-col lg:flex-row items-center justify-between gap-8 px-6 sm:px-12 py-10 rounded-2xl mx-2 sm:mx-6 lg:mx-12 mb-12 border border-red-500/20'
         style={{background: 'linear-gradient(135deg, #1a0505, #0a0a0a)'}}
       >
-        <div className='flex flex-col gap-4 px-4 py-4'>
+        <div className='flex flex-col gap-4 px-2 sm:px-4 py-4 text-center lg:text-left'>
           <h3 className='text-red-500 tracking-widest'>🔥 Just Dropped</h3>
-          <h1 className='text-5xl font-semibold text-white'>New Arrivals Just Landed</h1>
+          <h1 className='text-3xl sm:text-4xl lg:text-5xl font-semibold text-white'>New Arrivals Just Landed</h1>
           <p className='text-l text-zinc-500 tracking-wide'>Fresh styles from Nike, Jordan, Adidas & New Balance. Limited stock — shop before they're gone.</p>
         </div>
-        <div className='flex flex-col gap-2 items-center justify-center'>
+        <div className='flex flex-col gap-2 items-center justify-center shrink-0'>
           <Button variant="primary">Shop New Arrivals</Button>
           <p className='text-sm text-zinc-500'>Free shipping on orders over $150</p>
         </div>

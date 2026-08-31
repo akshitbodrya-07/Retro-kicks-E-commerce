@@ -23,7 +23,7 @@ const Shop = () => {
   }) 
 
   return (
-    <div className='px-20 py-10 flex flex-col gap-5'>
+    <div className='px-4 sm:px-10 lg:px-20 py-10 flex flex-col gap-5'>
       {/* Search Bar */}
       <div className='relative'>
         <input type="search" 
@@ -38,7 +38,7 @@ const Shop = () => {
       </div>
 
       {/* Filter pills */}
-      <div className='flex items-center gap-3'>
+      <div className='flex items-center gap-3 flex-wrap'>
         {brands.map(brand => (
           <button
             key={brand}
@@ -54,7 +54,7 @@ const Shop = () => {
       </div>
 
       {/* Product card */}
-      <div className='grid grid-cols-4 gap-6'>
+      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6'>
         {loading?(
           Array(12).fill(0).map((_,i) => <SkeletonCard key={i}/>)
         ): error?(
