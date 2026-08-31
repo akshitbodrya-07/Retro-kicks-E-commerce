@@ -1,9 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { Trash2, Truck, RefreshCcw, ShieldCheck } from 'lucide-react'
 
 const Cart = () => {
   const { cart, dispatch } = useCart()
+  const navigate = useNavigate()
 
   const subtotal = cart.reduce((total, item) => {
     return total + (item.price * item.quantity)
@@ -13,27 +15,42 @@ const Cart = () => {
 
   const total = subtotal + tax
 
+  const isEmpty = cart.length === 0
+
   return (
     <div>
       <div className=' px-16 py-5'>
         <h1 className='text-4xl font-medium'>Your Cart</h1>
-        <h3 className='text-zinc-500 tracking-wide mt-2 ml-1'>{cart.length} items in your cart</h3>
+        <h3 className='text-zinc-500 tracking-wide mt-2 ml-1'>
+          {cart.length} {cart.length === 1 ? 'item' : 'items'} in your cart
+        </h3>
 
-        <div className='grid grid-cols-2 gap-10 mt-10'>
+        {isEmpty ? (
+          <div className='flex flex-col items-center justify-center gap-4 mt-20 text-center'>
+            <p className='text-zinc-500 text-lg'>Your cart is empty.</p>
+            <button
+              onClick={() => navigate('/shop')}
+              className='bg-red-500 text-white px-6 py-2 rounded-lg text-sm hover:bg-red-400 transition-colors'
+            >
+              Continue Shopping
+            </button>
+          </div>
+        ) : (
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 mt-10'>
           <div>
             {cart.map(item => (
-              <div key={item.id} className='flex items-center gap-10 mb-6 border border-white/15 bg-zinc-900 rounded-xl px-5 py-3'>
-                <img src={item.image} alt={item.name} className='w-32 h-32 object-contain rounded bg-zinc-800 p-2'/>
-                <div className='w-full'>
+              <div key={`${item.id}-${item.size}`} className='flex items-center gap-4 sm:gap-10 mb-6 border border-white/15 bg-zinc-900 rounded-xl px-5 py-3'>
+                <img src={item.image} alt={item.name} className='w-32 h-32 shrink-0 object-contain rounded bg-zinc-800 p-2'/>
+                <div className='w-full min-w-0'>
                   <h4 className='text-sm text-zinc-500 tracking-widest uppercase'>{item.brand}</h4>
-                  <h3 className='text-2xl font-medium tracking-wide'>{item.name}</h3>
-                  <p className='text-sm text-zinc-500 mt-1'>Size: UK</p>
+                  <h3 className='text-2xl font-medium tracking-wide truncate'>{item.name}</h3>
+                  <p className='text-sm text-zinc-500 mt-1'>Size: UK {item.size}</p>
                   <div className='flex items-center justify-between gap-5 mt-3'>
                     <div className='flex gap-2'>
-                      <button 
+                      <button
                       onClick={() => dispatch({
                         type: 'UPDATE_QTY',
-                        payload: {id: item.id, quantity: item.quantity + 1}
+                        payload: {id: item.id, size: item.size, quantity: item.quantity + 1}
                       })}
                       className='w-8 h-8 flex items-center justify-center border border-zinc-500 hover:text-red-500 cursor-pointer hover:border-red-500'
                       >
@@ -45,12 +62,12 @@ const Cart = () => {
                         if(item.quantity > 1){
                           dispatch({
                           type: 'UPDATE_QTY',
-                          payload: {id: item.id, quantity: item.quantity - 1}
+                          payload: {id: item.id, size: item.size, quantity: item.quantity - 1}
                           })
                         }else{
                           dispatch({
                             type: 'REMOVE_ITEM',
-                            payload: {id:item.id}
+                            payload: {id: item.id, size: item.size}
                           })
                         }
                       }}
@@ -61,13 +78,13 @@ const Cart = () => {
                     </div>
                     <div className='flex items-center gap-6'>
                       <h3 className='text-xl text-red-500 font-medium'>${item.price}</h3>
-                      <button 
+                      <button
                       onClick={() => dispatch({
                         type: 'REMOVE_ITEM',
-                        payload: {id:item.id}
+                        payload: {id: item.id, size: item.size}
                       })}
                       className='flex items-center gap-2 text-zinc-500 hover:text-red-500 cursor-pointer'>
-                        <Trash2 size={15}/> 
+                        <Trash2 size={15}/>
                         <p>Remove</p>
                       </button>
                     </div>
@@ -77,7 +94,7 @@ const Cart = () => {
             ))}
           </div>
 
-          <div className='bg-zinc-900 rounded-xl border border-white/15 px-10 py-8'>
+          <div className='bg-zinc-900 rounded-xl border border-white/15 px-10 py-8 h-fit'>
             <div>
               <h1 className='text-3xl tracking-wide'>Order Summary</h1>
               <div className='flex items-center justify-between mt-5 text-zinc-500'>
@@ -110,10 +127,16 @@ const Cart = () => {
                 </button>
               </div>
               <div className='flex gap-2 mt-10'>
-                <button className='flex-1 bg-red-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-400 transition-colors'>
+                <button
+                  onClick={() => navigate('/checkout')}
+                  className='flex-1 bg-red-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-400 transition-colors'
+                >
                   Proceed to Checkout
                 </button>
-                <button className='flex-1 bg-zinc-700 text-white px-4 py-2 rounded-lg text-sm hover:bg-zinc-600 transition-colors'>
+                <button
+                  onClick={() => navigate('/shop')}
+                  className='flex-1 bg-zinc-700 text-white px-4 py-2 rounded-lg text-sm hover:bg-zinc-600 transition-colors'
+                >
                   Continue Shopping
                 </button>
               </div>
@@ -139,6 +162,7 @@ const Cart = () => {
             </div>
           </div>
         </div>
+        )}
       </div>
     </div>
   )

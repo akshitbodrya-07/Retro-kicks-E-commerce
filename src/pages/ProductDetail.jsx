@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import useProduct from '../hooks/useProduct'
 import { ChevronRight, Star, Truck, RefreshCcw, ShieldCheck } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Button from '../components/ui/Button'
+import { useCart } from '../context/CartContext'
 
 const ProductDetail = () => {
   const {id} = useParams()
+  const navigate = useNavigate()
+  const { dispatch } = useCart()
 
   const {data, loading, error} = useProduct(id)
 
@@ -14,6 +17,37 @@ const ProductDetail = () => {
   const finalPrice = data?.price - discountPrice
 
   const[selectedSize, setSelectedSize] = useState(null)
+  const[sizeError, setSizeError] = useState(false)
+
+  const addCurrentItemToCart = () => {
+    if (!selectedSize) {
+      setSizeError(true)
+      return false
+    }
+    setSizeError(false)
+    dispatch({
+      type: 'ADD_ITEM',
+      payload: {
+        id: data.id,
+        brand: data.brand,
+        name: data.name,
+        price: finalPrice,
+        image: data.image,
+        size: selectedSize
+      }
+    })
+    return true
+  }
+
+  const handleAddToCart = () => {
+    addCurrentItemToCart()
+  }
+
+  const handleBuyNow = () => {
+    if (addCurrentItemToCart()) {
+      navigate('/cart')
+    }
+  }
 
   return (
     <div className='px-20 py-4'>
@@ -56,9 +90,9 @@ const ProductDetail = () => {
             <h3 className='text-zinc-500 tracking-widest uppercase text-sm'>Select Size (UK)</h3>
             <div className='flex items-center gap-4 mt-5'>
               {data?.sizes?.map(size => (
-                <div 
+                <div
                   key={size}
-                  onClick={() => setSelectedSize(size)} 
+                  onClick={() => { setSelectedSize(size); setSizeError(false) }}
                   className={`flex items-center justify-center h-14 w-14 border rounded-lg cursor-pointer transition-all duration-200
                     ${selectedSize === size?
                       'border-red-500 text-red-500'
@@ -67,8 +101,11 @@ const ProductDetail = () => {
                 >
                   {size}
                 </div>
-              ))}   
+              ))}
             </div>
+            {sizeError && (
+              <p className='text-red-500 text-sm mt-2'>Please select a size before continuing</p>
+            )}
             <p className='text-lg text-zinc-500 mt-5'>{data?.description}</p>
           </div>
 
@@ -88,8 +125,8 @@ const ProductDetail = () => {
           </div>
 
           <div className='flex gap-4 mb-5'>
-            <Button variant="primary" className='flex-1'>Add to Cart</Button>
-            <Button variant="outline" className='flex-1'>Buy Now</Button>
+            <Button variant="primary" className='flex-1' onClick={handleAddToCart}>Add to Cart</Button>
+            <Button variant="outline" className='flex-1' onClick={handleBuyNow}>Buy Now</Button>
           </div>
 
         </div>
