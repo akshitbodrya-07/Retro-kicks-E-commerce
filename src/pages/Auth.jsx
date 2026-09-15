@@ -1,13 +1,19 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FaGoogle } from "react-icons/fa"
 import { AiFillFacebook } from "react-icons/ai"
 import { FaXTwitter } from "react-icons/fa6"
+import { useAuth } from '../context/AuthContext'
+import { API_URL } from '../config'
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true)
+  const [serverError, setServerError] = useState(null)
+  const navigate = useNavigate()
+  const { login } = useAuth()
 
   const loginSchema = z.object({
     email: z.string().email('Please enter a valid email'),
@@ -18,6 +24,44 @@ const Auth = () => {
     resolver: zodResolver(loginSchema)
   })
 
+  const onSubmit = async (data) => {
+    setServerError(null)
+    try {
+      if (isLogin) {
+        const res = await fetch(`${API_URL}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: data.email, password: data.password })
+        })
+        if (!res.ok) throw new Error('Invalid email or password')
+        const result = await res.json()
+        login(result.access_token)
+        navigate('/shop')
+      } else {
+        const signupRes = await fetch(`${API_URL}/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: data.email, password: data.password })
+        })
+        if (!signupRes.ok) {
+          const errData = await signupRes.json()
+          throw new Error(errData.detail || 'Signup failed')
+        }
+
+        const loginRes = await fetch(`${API_URL}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: data.email, password: data.password })
+        })
+        const loginResult = await loginRes.json()
+        login(loginResult.access_token)
+        navigate('/shop')
+      }
+    } catch (err) {
+      setServerError(err.message)
+    }
+  }
+
   return (
     <div className='flex items-center justify-center'>
       <div className='bg-zinc-900 flex flex-col items-center gap-4 rounded-xl mt-20 w-full max-w-md py-8'>
@@ -27,15 +71,15 @@ const Auth = () => {
         </div>
 
         <div className='w-full px-10 flex justify-center items-center'>
-          <button 
+          <button
           onClick={() => setIsLogin(true)}
           className={`px-4 py-3 flex-1 text-sm border-b ${isLogin ? 'border-red-500 text-white' : 'border-zinc-500 text-zinc-500'}`}>Login</button>
-          <button 
+          <button
           onClick={() => setIsLogin(false)}
           className={`px-4 py-3 flex-1 text-sm border-b ${!isLogin ? 'border-red-500 text-white' : 'border-zinc-500 text-zinc-500'}`}>Sign Up</button>
         </div>
-        
-        <form onSubmit={handleSubmit((data) => console.log(data))} className='flex flex-col gap-2 px-10 py-4 w-full'>
+
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-2 px-10 py-4 w-full'>
           {!isLogin && (
             <>
               <h1 className='text-sm text-zinc-500 uppercase tracking-wide'>Full Name</h1>
@@ -51,6 +95,9 @@ const Auth = () => {
           <input type="password" placeholder='Password' className='px-4 py-2 bg-zinc-800 border border-zinc-700 rounded' {...register('password')}/>
           {errors.password && (
             <p className='text-red-500 text-xs mt-1'>{errors.password.message}</p>
+          )}
+          {serverError && (
+            <p className='text-red-500 text-xs mt-1'>{serverError}</p>
           )}
           <button className='bg-red-500 p-2 rounded mt-4'>{isLogin? 'Sign In' : 'Create Account'}</button>
         </form>

@@ -5,9 +5,7 @@ const CartContext = createContext()
 const cartReducer = (state, action) => {
     switch(action.type){
         case 'ADD_ITEM':{
-            // Two lines are the "same" cart item only if both the shoe AND the
-            // size match — otherwise a size 9 and a size 10 of the same shoe
-            // would incorrectly collapse into one line with quantity 2.
+            
             const exists = state.find(item =>
                 item.id === action.payload.id && item.size === action.payload.size
             )

@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
+import { useAuth } from '../../context/AuthContext'
 import { Menu, X } from 'lucide-react'
 
 const CartIcon = ({ count }) => (
@@ -16,6 +17,7 @@ const CartIcon = ({ count }) => (
 
 const Navbar = () => {
     const location = useLocation()
+    const navigate = useNavigate()
     const [menuOpen, setMenuOpen] = useState(false)
 
     const navLinks = [
@@ -24,11 +26,18 @@ const Navbar = () => {
     ]
 
     const { cart } = useCart()
+    const { isLoggedIn, logout } = useAuth()
 
     const linkClass = (path) => `text-lg transition-color duration-200 ${
         location.pathname === path?
         'text-red-500 font-medium' : 'text-gray-400 hover:text-white'
     }`
+
+    const handleLogout = () => {
+        logout()
+        setMenuOpen(false)
+        navigate('/')
+    }
 
   return (
     <nav className='px-4 sm:px-8 py-4 border-b border-white/10'>
@@ -37,7 +46,7 @@ const Navbar = () => {
                 RETRO <span className='text-red-500'>KICKS</span>
             </Link>
 
-            {/* Desktop nav links — hidden below md, shown in the dropdown instead */}
+            
             <div className='hidden md:flex gap-8'>
                 {navLinks.map(link => (
                     <Link key={link.name} to={link.path} className={linkClass(link.path)}>
@@ -47,15 +56,27 @@ const Navbar = () => {
             </div>
 
             <div className='hidden md:flex items-center gap-6'>
-                <Link to="/auth" className='text-sm text-gray-400 hover:text-white transition-colors'>
-                    Login
-                </Link>
+                {isLoggedIn && (
+                    <Link to="/my-orders" onClick={() => setMenuOpen(false)} className='text-lg text-gray-400 hover:text-white transition-colors'>
+                        My Orders
+                    </Link>
+                )}
+
+                {isLoggedIn ? (
+                    <button onClick={handleLogout} className='text-sm text-gray-400 hover:text-white transition-colors'>
+                        Logout
+                    </button>
+                ) : (
+                    <Link to="/auth" className='text-sm text-gray-400 hover:text-white transition-colors'>
+                        Login
+                    </Link>
+                )}
                 <Link to="/cart">
                     <CartIcon count={cart.length} />
                 </Link>
             </div>
 
-            {/* Mobile: cart stays visible, everything else moves into the hamburger menu */}
+            
             <div className='flex md:hidden items-center gap-5'>
                 <Link to="/cart">
                     <CartIcon count={cart.length} />
@@ -77,9 +98,20 @@ const Navbar = () => {
                         {link.name}
                     </Link>
                 ))}
-                <Link to="/auth" onClick={() => setMenuOpen(false)} className='text-lg text-gray-400 hover:text-white transition-colors'>
-                    Login
-                </Link>
+                {isLoggedIn && (
+                    <Link to="/my-orders" onClick={() => setMenuOpen(false)} className='text-lg text-gray-400 hover:text-white transition-colors'>
+                        My Orders
+                    </Link>
+        )}
+                {isLoggedIn ? (
+                    <button onClick={handleLogout} className='text-lg text-left text-gray-400 hover:text-white transition-colors'>
+                        Logout
+                    </button>
+                ) : (
+                    <Link to="/auth" onClick={() => setMenuOpen(false)} className='text-lg text-gray-400 hover:text-white transition-colors'>
+                        Login
+                    </Link>
+                )}
             </div>
         )}
     </nav>

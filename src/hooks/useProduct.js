@@ -1,28 +1,30 @@
 import { useState, useEffect } from 'react'
-import products from '../data/products'
+import { API_URL } from '../config'
 
-// Looks up a single product by id from the bundled catalog, mirroring the
-// shape of useFetch/useProducts. Replaces the old
-// http://localhost:3001/products/:id call, which only worked when the
-// developer's local json-server was running.
+
 const useProduct = (id) => {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const found = products.find(p => String(p.id) === String(id))
-      if (found) {
-        setData(found)
-        setError(null)
-      } else {
-        setData(null)
-        setError(new Error('Product not found'))
-      }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLoading(true)
+    fetch(`${API_URL}/products/${id}`)
+    .then(res => {
+      if(!res.ok) throw new Error("Product not found")
+        return res.json()
+    })
+    .then(data => {
+      setData(data)
+      setError(null)
       setLoading(false)
-    }, 400)
-    return () => clearTimeout(timer)
+    })
+    .catch(err => {
+      setData(null)
+      setError(err)
+      setLoading(false)
+    })
   }, [id])
 
   return { data, loading, error }

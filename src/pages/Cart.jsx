@@ -1,4 +1,3 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { Trash2, Truck, RefreshCcw, ShieldCheck } from 'lucide-react'

@@ -8,6 +8,7 @@ import Auth from './pages/Auth'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import { useLocation } from 'react-router-dom'
+import MyOrders from './pages/MyOrders'
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/cart" element={<Cart/>} />
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/auth" element={<Auth/>}/>
+          <Route path="/my-orders" element={<MyOrders/>} />
         </Routes>
       </main>
       {!isAuthPage && <Footer />}

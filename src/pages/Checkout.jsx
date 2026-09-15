@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCart } from '../context/CartContext'
+import { useAuth } from '../context/AuthContext'
+import { API_URL } from '../config'
 
-// Shipping details schema. Kept in the same style as Auth.jsx's zod schema
-// so validation errors render the same way across the app.
 const shippingSchema = z.object({
   fullName: z.string().min(2, 'Enter your full name'),
   address: z.string().min(5, 'Enter your street address'),
@@ -17,8 +17,10 @@ const shippingSchema = z.object({
 
 const Checkout = () => {
   const { cart, dispatch } = useCart()
+  const { token } = useAuth()
   const navigate = useNavigate()
   const [placed, setPlaced] = useState(false)
+  const [orderError, setOrderError] = useState(null)
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(shippingSchema)
@@ -28,15 +30,43 @@ const Checkout = () => {
   const tax = subtotal * 0.08
   const total = subtotal + tax
 
-  // There's no backend yet, so "placing an order" can't actually persist
-  // anywhere — this just proves the flow end to end (validate address,
-  // review order, confirm) and clears the cart, the same way a real
-  // checkout would once it succeeds. Lesson 6 (checkout + orders) replaces
-  // this with a real POST /orders call, and lesson 8 rewires this exact
-  // form to call it.
-  const onSubmit = () => {
-    setPlaced(true)
-    dispatch({ type: 'CLEAR_CART' })
+  const onSubmit = async () => {
+    setOrderError(null)
+    try {
+      const res = await fetch(`${API_URL}/orders`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          items: cart.map(item => ({
+            product_id: item.id,
+            size: item.size,
+            quantity: item.quantity
+          }))
+        })
+      })
+      if (!res.ok) throw new Error('Could not place your order — please try again')
+      setPlaced(true)
+      dispatch({ type: 'CLEAR_CART' })
+    } catch (err) {
+      setOrderError(err.message)
+    }
+  }
+
+  if (!token) {
+    return (
+      <div className='px-16 py-20 flex flex-col items-center text-center gap-4'>
+        <h1 className='text-3xl font-medium'>Please log in to check out</h1>
+        <button
+          onClick={() => navigate('/auth')}
+          className='bg-red-500 text-white px-6 py-2 rounded-lg text-sm hover:bg-red-400 transition-colors mt-4'
+        >
+          Go to Login
+        </button>
+      </div>
+    )
   }
 
   if (placed) {
@@ -44,8 +74,7 @@ const Checkout = () => {
       <div className='px-16 py-20 flex flex-col items-center text-center gap-4'>
         <h1 className='text-4xl font-medium'>Order placed 🎉</h1>
         <p className='text-zinc-500 max-w-md'>
-          This is a placeholder confirmation — there's no backend yet to actually
-          save this order. Once the API exists, this page will submit here for real.
+          Your order has been saved. You can view it later from your order history.
         </p>
         <button
           onClick={() => navigate('/shop')}
@@ -125,6 +154,8 @@ const Checkout = () => {
             {...register('country')}
           />
           {errors.country && <p className='text-red-500 text-xs'>{errors.country.message}</p>}
+
+          {orderError && <p className='text-red-500 text-xs mt-1'>{orderError}</p>}
 
           <button type='submit' className='bg-red-500 p-3 rounded mt-6 hover:bg-red-400 transition-colors'>
             Place Order — ${total.toFixed(2)}
